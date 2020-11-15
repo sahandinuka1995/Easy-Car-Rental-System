@@ -4,13 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 @Entity
 public class Customer {
     @Id
@@ -19,10 +22,9 @@ public class Customer {
     private String address;
     private String contact;
 
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL})
-    private List<Orders> orders = new ArrayList<>();
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "email", referencedColumnName = "email", nullable = false)
+    @OneToOne(mappedBy = "cusId")
     private User user;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Orders> orders = new ArrayList<>();
 }

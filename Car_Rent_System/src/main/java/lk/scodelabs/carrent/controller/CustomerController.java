@@ -1,16 +1,22 @@
 package lk.scodelabs.carrent.controller;
 
 import lk.scodelabs.carrent.dto.CustomerDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.scodelabs.carrent.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/customer")
+@CrossOrigin
 public class CustomerController {
 
-    @GetMapping
-    public CustomerDTO getAllCustomers() {
-        return new CustomerDTO("952281372v", true, "Panadura", "0777290322");
+    @Autowired
+    CustomerService customerService;
+
+    @PostMapping()
+    public void saveCustomer(@RequestBody CustomerDTO dto) {
+        customerService.saveCustomer(dto);
     }
+
+
 }
