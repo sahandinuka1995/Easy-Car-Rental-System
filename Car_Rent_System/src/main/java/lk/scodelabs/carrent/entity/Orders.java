@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,28 +12,29 @@ import java.util.List;
 @Entity
 public class Orders {
     @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private String orderId;
     private String dateTime;
     private String returnDate;
     private boolean bankSlip;
     private double lossDamage;
-
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
-    private List<OrderStatus> orderStatus;
+    private double status;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "cusId", referencedColumnName = "nic", nullable = false)
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "payId", referencedColumnName = "payId", nullable = false)
+    @OneToOne(mappedBy = "orders")
     private Payment payment;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "returnId", referencedColumnName = "oReturnId", nullable = false)
-    private OrderReturn orderReturn;
+//    @OneToOne(mappedBy = "orders")
+//    private OrderReturn orderReturn;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "carId", referencedColumnName = "regNo", nullable = false)
     private Car car;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "driverId", referencedColumnName = "driverId", nullable = false)
+    private Driver driver;
 }

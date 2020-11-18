@@ -18,26 +18,17 @@ import java.util.List;
 public class Car {
     @Id
     private String regNo;
-    private int noOfPassenger;
+    private int noOfPassengers;
     private String type;
     private String fuelType;
     private String brand;
     private double noOfKm;
     private String color;
     private String transmissionType;
-    private double extraKmPrice;
+    private double priceForExtraKm;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<CarImage> carImages;
-
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-    private List<CarFreeMileage> carFreeMileages;
-
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-    private List<CarMaintenance> carMaintenances;
-
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-    private List<CarPriceForRentDuration> carPriceForRentDurations;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Orders> orders = new ArrayList<>();

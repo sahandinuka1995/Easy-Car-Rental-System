@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +20,6 @@ public class Customer {
     private boolean nicPhoto;
     private String address;
     private String contact;
-
-    @OneToOne(mappedBy = "cusId")
-    private User user;
 
     @OneToMany(mappedBy = "customer")
     private List<Orders> orders = new ArrayList<>();

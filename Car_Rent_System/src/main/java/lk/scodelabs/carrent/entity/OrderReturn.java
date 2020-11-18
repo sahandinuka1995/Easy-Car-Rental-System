@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +17,7 @@ public class OrderReturn {
     private String date;
     private double usedKm;
 
-    @OneToOne(mappedBy = "orderReturn")
-    private Orders orders;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "orderId", referencedColumnName = "orderId", nullable = false)
+//    private Orders orders;
 }

@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Entity
 public class CarImage {
     @Id
-    private String imgId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int imgId;
     private boolean img;
 
     @ManyToOne(cascade = CascadeType.ALL)
