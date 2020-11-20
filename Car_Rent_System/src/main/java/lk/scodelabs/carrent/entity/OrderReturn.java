@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,11 +15,15 @@ import javax.persistence.Id;
 @Entity
 public class OrderReturn {
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String oReturnId;
-    private String date;
+    private String rDate;
     private double usedKm;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "orderId", referencedColumnName = "orderId", nullable = false)
-//    private Orders orders;
+//    @OneToOne(mappedBy = "orderReturn", cascade = {CascadeType.ALL})
+//    private Payment payment;
+
+    @OneToOne
+    @JoinColumn(name = "orderId", referencedColumnName = "orderId")
+    private Orders orders;
 }

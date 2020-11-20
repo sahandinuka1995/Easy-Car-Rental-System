@@ -2,8 +2,7 @@ package lk.scodelabs.carrent.service.impl;
 
 import lk.scodelabs.carrent.dto.OrderDTO;
 import lk.scodelabs.carrent.entity.Orders;
-import lk.scodelabs.carrent.repo.CustomerRepo;
-import lk.scodelabs.carrent.repo.OrderRepo;
+import lk.scodelabs.carrent.repo.*;
 import lk.scodelabs.carrent.service.OrderService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -23,6 +22,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     CustomerRepo customerRepo;
+
+    @Autowired
+    DriverRepo driverRepo;
+
+    @Autowired
+    CarRepo carRepo;
+
+    @Autowired
+    OrderReturnRepo orderReturnRepo;
 
     @Autowired
     ModelMapper modelMapper;
@@ -58,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteOrder(String id) {
         if (orderRepo.existsById(id)) {
-            orderRepo.deleteByOrderId(id);
+            orderRepo.deleteById(id);
         } else {
             throw new RuntimeException("Couldn't to delete Order!");
         }
@@ -68,5 +76,17 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDTO> getAllOrders() {
         return modelMapper.map(orderRepo.findAll(), new TypeToken<List<OrderDTO>>() {
         }.getType());
+    }
+
+    @Override
+    public void confirmOrder(String id) {
+        if (orderRepo.existsById(id)) {
+            Optional<Orders> order = orderRepo.findById(id);
+            OrderDTO map = modelMapper.map(order.get(), OrderDTO.class);
+            map.setStatus(true);
+
+            Orders map1 = modelMapper.map(map, Orders.class);
+            orderRepo.save(map1);
+        }
     }
 }

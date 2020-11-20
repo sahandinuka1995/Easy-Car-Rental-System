@@ -64,4 +64,12 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(userRepo.findAll(), new TypeToken<List<UserDTO>>() {
         }.getType());
     }
+
+    @Override
+    public boolean userLogin(String email, String pass) {
+        if (userRepo.existsById(email) & userRepo.existsById(pass)) {
+            System.out.println("found");
+        }
+        return false;
+    }
 }

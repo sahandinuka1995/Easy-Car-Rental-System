@@ -49,10 +49,15 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<StandardResponse> getAllCustomers() {
-        System.out.println("sdsfd");
         List<UserDTO> allUsers = userService.getAllUsers();
         StandardResponse response = new StandardResponse(200, "Success", allUsers);
         return new ResponseEntity(response, HttpStatus.CREATED);
+    }
 
+    @GetMapping("/login")
+    public ResponseEntity userLogin(@RequestParam String email, @RequestParam String pass) {
+        boolean b = userService.userLogin(email, pass);
+        StandardResponse response = new StandardResponse(200, "Success", null);
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
 }

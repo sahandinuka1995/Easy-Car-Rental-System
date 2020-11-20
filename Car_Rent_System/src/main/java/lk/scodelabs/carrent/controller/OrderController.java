@@ -1,8 +1,5 @@
 package lk.scodelabs.carrent.controller;
 
-import lk.scodelabs.carrent.dto.CarDTO;
-import lk.scodelabs.carrent.dto.CustomerDTO;
-import lk.scodelabs.carrent.dto.DriverDTO;
 import lk.scodelabs.carrent.dto.OrderDTO;
 import lk.scodelabs.carrent.service.CarService;
 import lk.scodelabs.carrent.service.CustomerService;
@@ -36,46 +33,14 @@ public class OrderController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity addOrder(@RequestBody OrderDTO dto) {
-        CustomerDTO cus = customerService.searchCustomer(dto.getCustomer().getNic());
-        CarDTO car = carService.searchCar(dto.getCar().getRegNo());
-        DriverDTO driver = driverService.searchDriver(dto.getDriver().getDriverId());
-
-        OrderDTO order = new OrderDTO(
-                dto.getOrderId(),
-                dto.getDateTime(),
-                dto.getReturnDate(),
-                dto.isBankSlip(),
-                dto.getLossDamage(),
-                dto.getStatus(),
-                cus,
-                car,
-                driver);
-
-        orderService.saveOrder(order);
-
+        orderService.saveOrder(dto);
         StandardResponse response = new StandardResponse(200, "Success", null);
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity updateOrder(@RequestBody OrderDTO dto) {
-        CustomerDTO cus = customerService.searchCustomer(dto.getCustomer().getNic());
-        CarDTO car = carService.searchCar(dto.getCar().getRegNo());
-        DriverDTO driver = driverService.searchDriver(dto.getDriver().getDriverId());
-
-        OrderDTO order = new OrderDTO(
-                dto.getOrderId(),
-                dto.getDateTime(),
-                dto.getReturnDate(),
-                dto.isBankSlip(),
-                dto.getLossDamage(),
-                dto.getStatus(),
-                cus,
-                car,
-                driver);
-
-        orderService.saveOrder(order);
-
+        orderService.updateOrder(dto);
         StandardResponse response = new StandardResponse(200, "Success", null);
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
@@ -89,9 +54,10 @@ public class OrderController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity searchOrder(@PathVariable String id) {
-        orderService.searchOrder(id);
-        StandardResponse response = new StandardResponse(200, "Success", null);
-        return new ResponseEntity(response, HttpStatus.CREATED);
+        OrderDTO ob = orderService.searchOrder(id);
+        StandardResponse response = new StandardResponse(200, "Success", ob);
+        System.out.println(response.getData());
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @GetMapping
@@ -100,5 +66,12 @@ public class OrderController {
         StandardResponse response = new StandardResponse(200, "Success", allOrders);
         return new ResponseEntity(response, HttpStatus.CREATED);
 
+    }
+
+    @PutMapping(params = {"confirm"})
+    public ResponseEntity confirmOrder(String confirm) {
+        orderService.confirmOrder(confirm);
+        StandardResponse response = new StandardResponse(200, "Success", null);
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
 }

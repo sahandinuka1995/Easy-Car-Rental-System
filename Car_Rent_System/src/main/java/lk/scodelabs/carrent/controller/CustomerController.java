@@ -52,6 +52,5 @@ public class CustomerController {
         List<CustomerDTO> allCustomer = customerService.getAllCustomer();
         StandardResponse response = new StandardResponse(200, "Success", allCustomer);
         return new ResponseEntity(response, HttpStatus.CREATED);
-
     }
 }

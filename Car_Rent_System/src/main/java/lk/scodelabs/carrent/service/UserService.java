@@ -14,4 +14,6 @@ public interface UserService {
     void deleteUser(String id);
 
     List<UserDTO> getAllUsers();
+
+    boolean userLogin(String email, String pass);
 }

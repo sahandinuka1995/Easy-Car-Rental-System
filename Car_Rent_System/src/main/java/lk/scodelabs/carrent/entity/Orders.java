@@ -12,29 +12,25 @@ import javax.persistence.*;
 @Entity
 public class Orders {
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
     private String orderId;
     private String dateTime;
     private String returnDate;
     private boolean bankSlip;
     private double lossDamage;
-    private double status;
+    private boolean status;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "cusId", referencedColumnName = "nic", nullable = false)
     private Customer customer;
 
-    @OneToOne(mappedBy = "orders")
-    private Payment payment;
+    @OneToOne(mappedBy = "orders", cascade = {CascadeType.ALL})
+    private OrderReturn orderReturn;
 
-//    @OneToOne(mappedBy = "orders")
-//    private OrderReturn orderReturn;
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "carId", referencedColumnName = "regNo", nullable = false)
     private Car car;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "driverId", referencedColumnName = "driverId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "driverId", referencedColumnName = "driverId", nullable = true)
     private Driver driver;
 }

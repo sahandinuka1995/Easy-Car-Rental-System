@@ -18,4 +18,9 @@ public class CarDTO {
     private String transmissionType;
     private double priceForExtraKm;
 //    private CarImage carImage;
+
+
+    public CarDTO(String regNo) {
+        this.regNo = regNo;
+    }
 }

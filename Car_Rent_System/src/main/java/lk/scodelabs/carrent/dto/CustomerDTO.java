@@ -10,7 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CustomerDTO {
     private String nic;
-    private boolean nicPhoto;
+    private String nicPhoto;
     private String address;
     private String contact;
+
+    public CustomerDTO(String nic) {
+        this.nic = nic;
+    }
 }

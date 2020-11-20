@@ -14,4 +14,6 @@ public interface OrderService {
     void deleteOrder(String id);
 
     List<OrderDTO> getAllOrders();
+
+    void confirmOrder(String id);
 }

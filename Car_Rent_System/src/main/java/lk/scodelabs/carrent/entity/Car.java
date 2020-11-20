@@ -32,4 +32,8 @@ public class Car {
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Orders> orders = new ArrayList<>();
+
+    public Car(String regNo) {
+        this.regNo = regNo;
+    }
 }

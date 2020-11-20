@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -17,10 +18,14 @@ import java.util.List;
 public class Customer {
     @Id
     private String nic;
-    private boolean nicPhoto;
+    private String nicPhoto;
     private String address;
     private String contact;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Orders> orders = new ArrayList<>();
+
+    public Customer(String nic) {
+        this.nic = nic;
+    }
 }
