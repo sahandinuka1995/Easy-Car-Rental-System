@@ -52,12 +52,11 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void deleteCar(String id) {
-//        if (carRepo.existsById(id)) {
-//            carRepo.deleteById(id);
-//        } else {
-//            throw new RuntimeException("Couldn't to delete Car!");
-//        }
-        System.out.println(id);
+        if (carRepo.existsById(id)) {
+            carRepo.deleteById(id);
+        } else {
+            throw new RuntimeException("Couldn't to delete Car!");
+        }
     }
 
     @Override

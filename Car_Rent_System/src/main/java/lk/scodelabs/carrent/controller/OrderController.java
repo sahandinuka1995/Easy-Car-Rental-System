@@ -56,7 +56,6 @@ public class OrderController {
     public ResponseEntity searchOrder(@PathVariable String id) {
         OrderDTO ob = orderService.searchOrder(id);
         StandardResponse response = new StandardResponse(200, "Success", ob);
-        System.out.println(response.getData());
         return new ResponseEntity(response, HttpStatus.OK);
     }
 

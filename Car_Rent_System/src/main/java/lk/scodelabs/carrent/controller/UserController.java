@@ -42,8 +42,8 @@ public class UserController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity searchUser(@PathVariable String id) {
-        userService.searchUser(id);
-        StandardResponse response = new StandardResponse(200, "Success", null);
+        UserDTO userDTO = userService.searchUser(id);
+        StandardResponse response = new StandardResponse(200, "Success", userDTO);
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
@@ -56,8 +56,8 @@ public class UserController {
 
     @GetMapping("/login")
     public ResponseEntity userLogin(@RequestParam String email, @RequestParam String pass) {
-        boolean b = userService.userLogin(email, pass);
-        StandardResponse response = new StandardResponse(200, "Success", null);
+        UserDTO user = userService.userLogin(email, pass);
+        StandardResponse response = new StandardResponse(200, "Success", user);
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
 }

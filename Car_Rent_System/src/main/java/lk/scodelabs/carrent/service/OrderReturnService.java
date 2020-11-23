@@ -14,4 +14,6 @@ public interface OrderReturnService {
     void deleteCOrderReturn(String id);
 
     List<OrderReturnDTO> getAllOrderReturns();
+
+    boolean searchOrderReturnAvailable(String id);
 }

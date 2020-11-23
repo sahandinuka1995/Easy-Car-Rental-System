@@ -20,8 +20,8 @@ public class OrderReturn {
     private String rDate;
     private double usedKm;
 
-//    @OneToOne(mappedBy = "orderReturn", cascade = {CascadeType.ALL})
-//    private Payment payment;
+    @OneToOne(mappedBy = "orderReturn")
+    private Payment payment;
 
     @OneToOne
     @JoinColumn(name = "orderId", referencedColumnName = "orderId")

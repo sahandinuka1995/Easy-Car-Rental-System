@@ -22,7 +22,6 @@ public class CarController {
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity saveCar(@RequestBody CarDTO dto) {
         carService.saveCar(dto);
-        System.out.println(dto.toString());
         StandardResponse response = new StandardResponse(200, "Success", null);
         return new ResponseEntity(response, HttpStatus.CREATED);
     }

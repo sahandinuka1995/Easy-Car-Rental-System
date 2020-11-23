@@ -66,10 +66,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean userLogin(String email, String pass) {
-        if (userRepo.existsById(email) & userRepo.existsById(pass)) {
-            System.out.println("found");
+    public UserDTO userLogin(String email, String pass) {
+        Optional<User> byId = userRepo.findById(email);
+        User user = byId.get();
+        UserDTO map = modelMapper.map(byId.get(), UserDTO.class);
+
+        if (user.getEmail().equals(email) & user.getPassword().equals(pass)) {
+            map.setPassword(null);
+            return map;
+        } else {
+            return null;
         }
-        return false;
     }
 }

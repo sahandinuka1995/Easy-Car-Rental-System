@@ -37,7 +37,6 @@ public class OrderReturnServiceImpl implements OrderReturnService {
 
             OrderReturn map1 = modelMapper.map(dto, OrderReturn.class);
             orderReturnRepo.save(map1);
-
         }
     }
 
@@ -59,5 +58,13 @@ public class OrderReturnServiceImpl implements OrderReturnService {
     @Override
     public List<OrderReturnDTO> getAllOrderReturns() {
         return null;
+    }
+
+    @Override
+    public boolean searchOrderReturnAvailable(String id) {
+        boolean b = orderReturnRepo.existsById(id);
+        System.out.println(id);
+        System.out.println(b);
+        return false;
     }
 }

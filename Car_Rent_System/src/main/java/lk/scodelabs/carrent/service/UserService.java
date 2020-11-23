@@ -15,5 +15,5 @@ public interface UserService {
 
     List<UserDTO> getAllUsers();
 
-    boolean userLogin(String email, String pass);
+    UserDTO userLogin(String email, String pass);
 }

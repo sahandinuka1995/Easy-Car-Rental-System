@@ -24,4 +24,18 @@ public class fileUploadController {
         StandardResponse response = new StandardResponse(200, "Success", null);
         return new ResponseEntity(response, HttpStatus.OK);
     }
+
+    @PostMapping(params = {"oid"})
+    public ResponseEntity saveBankSlipImage(@RequestParam("file") MultipartFile file, String oid) throws IOException {
+        fileUploadService.uploadOrderFile(file, oid);
+        StandardResponse response = new StandardResponse(200, "Success", null);
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    @PostMapping(params = {"regNo"})
+    public ResponseEntity saveBankSlipImage(@RequestParam("file") MultipartFile[] file, String regNo) throws IOException {
+        fileUploadService.uploadCarFiles(file, regNo);
+        StandardResponse response = new StandardResponse(200, "Success", null);
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
 }

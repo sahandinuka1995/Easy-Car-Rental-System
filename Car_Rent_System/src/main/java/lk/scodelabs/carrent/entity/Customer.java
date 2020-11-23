@@ -24,8 +24,4 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Orders> orders = new ArrayList<>();
-
-    public Customer(String nic) {
-        this.nic = nic;
-    }
 }
